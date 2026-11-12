@@ -1,0 +1,7 @@
+ultralytics>8.3.0
+click
+opencv-python
+PyYAML
+tqdm
+transformers>=4.40
+Pillow
