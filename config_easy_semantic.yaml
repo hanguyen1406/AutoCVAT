@@ -1,0 +1,33 @@
+# easy_semantic: chỉ nhãn "stuff" (vùng), xuất polygon.
+# Chạy:
+#   python AutoCvat.py --img_folder=easy_semantic --yaml_pth=config_easy_semantic.yaml --annotations_zip=easy_semantic_annotations
+backend: semantic
+
+# id -> tên nhãn trong project CVAT
+names:
+  0: road
+  1: sidewalk
+  2: building
+  3: vegetation
+  4: sky
+
+# Tên lớp Cityscapes của SegFormer -> nhãn CVAT
+mapping:
+  road: road
+  sidewalk: sidewalk
+  building: building
+  vegetation: vegetation
+  sky: sky
+
+confs:
+  road: 0.5
+  sidewalk: 0.5
+  building: 0.5
+  vegetation: 0.5
+  sky: 0.5
+
+min_area: 300
+minimize_points: true
+
+semantic_model: nvidia/segformer-b2-finetuned-cityscapes-1024-1024
+# semantic_model: nvidia/segformer-b5-finetuned-cityscapes-1024-1024

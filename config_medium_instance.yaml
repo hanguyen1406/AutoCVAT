@@ -1,0 +1,35 @@
+# medium_instance: nhãn "things" (đối tượng rời), xuất polygon từ YOLO11-seg.
+# Chạy:
+#   python AutoCvat.py --img_folder=medium_instance --weights=yolo11m-seg.pt --yaml_pth=config_medium_instance.yaml --annotations_zip=medium_instance_annotations
+# Nếu dùng model tự train trên CVAT thì thay --weights và sửa mapping theo tên lớp của model.
+backend: yolo
+
+names:
+  0: person
+  1: bicycle
+  2: car
+  3: motorcycle
+  4: bus
+  5: truck
+
+# Tên lớp COCO (hoặc model custom) -> nhãn CVAT
+mapping:
+  person: person
+  bicycle: bicycle
+  car: car
+  motorcycle: motorcycle
+  bus: bus
+  truck: truck
+
+confs:
+  person: 0.5
+  bicycle: 0.4
+  car: 0.4
+  motorcycle: 0.4
+  bus: 0.4
+  truck: 0.4
+
+iou: 0.7
+imgsz: 640
+segment: true
+minimize_points: true

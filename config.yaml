@@ -1,0 +1,46 @@
+# Backend sinh annotation:
+#   yolo     -> ultralytics YOLO (object detection / instance segmentation),
+#               dùng cho các lớp đối tượng như car, person, truck...
+#   semantic -> semantic segmentation Cityscapes (road, sidewalk, building,
+#               vegetation, sky...), phù hợp với ảnh đường phố.
+backend: semantic
+
+# Danh sách nhãn trong CVAT: id -> tên nhãn.
+# Đây là id/tên label của project CVAT, KHÔNG phải index lớp của model.
+names:
+  0: road
+  1: sidewalk
+  2: building
+  3: vegetation
+  4: sky
+
+# Ánh xạ tên lớp của model -> tên nhãn CVAT (theo TÊN, không theo thứ tự).
+# Chỉ các lớp có trong mapping mới được dự đoán và xuất annotation.
+# Với backend semantic, tên bên trái là tên lớp Cityscapes của SegFormer.
+mapping:
+  road: road
+  sidewalk: sidewalk
+  building: building
+  vegetation: vegetation
+  sky: sky
+
+# Ngưỡng confidence theo từng nhãn CVAT
+confs:
+  road: 0.5
+  sidewalk: 0.5
+  building: 0.5
+  vegetation: 0.5
+  sky: 0.5
+
+# Với backend yolo
+iou: 0.7
+imgsz: 640
+segment: true
+
+# Với backend semantic
+# semantic_model: nvidia/segformer-b2-finetuned-cityscapes-1024-1024   # mặc định
+# semantic_model: nvidia/segformer-b5-finetuned-cityscapes-1024-1024   # chất lượng cao hơn, chậm hơn
+# semantic_imgsz: 1024      # mặc định của model Cityscapes đã là 1024
+min_area: 300               # bỏ qua vùng nhỏ hơn 300 pixel
+
+minimize_points: true

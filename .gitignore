@@ -1,0 +1,18 @@
+# Игнорировать все файлы с указанными расширениями
+*.zip
+*.json
+*.yaml
+!config*.yaml
+*.png
+*.jpeg
+*.jpg
+*.JPG
+*.pt
+*.pth
+*.txt
+# Игнорировать директории и их содержимое
+**/test_images/
+**/__pycache__/
+**/ipynb_checkpoints/
+YoloToCoco.egg-info/
+build/

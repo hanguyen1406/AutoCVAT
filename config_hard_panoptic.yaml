@@ -1,0 +1,65 @@
+# hard_panoptic: gộp cả "stuff" (semantic) và "things" (instance) vào một file COCO.
+# Vùng stuff được cắt bỏ phần chồng lên things để panoptic không bị overlap.
+# Chạy:
+#   python AutoCvat.py --img_folder=hard_panoptic --yaml_pth=config_hard_panoptic.yaml --annotations_zip=hard_panoptic_annotations
+backend: panoptic
+
+# Toàn bộ nhãn của project CVAT: stuff + things
+names:
+  0: road
+  1: sidewalk
+  2: building
+  3: vegetation
+  4: sky
+  5: person
+  6: car
+  7: bus
+  8: truck
+  9: motorcycle
+  10: bicycle
+  11: traffic light
+
+# Model semantic cho các vùng stuff (Cityscapes)
+semantic:
+  model: nvidia/segformer-b2-finetuned-cityscapes-1024-1024
+  mapping:
+    road: road
+    sidewalk: sidewalk
+    building: building
+    vegetation: vegetation
+    sky: sky
+  confs:
+    road: 0.5
+    sidewalk: 0.5
+    building: 0.5
+    vegetation: 0.5
+    sky: 0.5
+  min_area: 300
+  minimize_points: true
+  # imgsz: 1024
+
+# Model instance cho các đối tượng (YOLO)
+instance:
+  model: yolo11m-seg.pt
+  mapping:
+    person: person
+    car: car
+    bus: bus
+    truck: truck
+    motorcycle: motorcycle
+    bicycle: bicycle
+    traffic light: traffic light
+  confs:
+    person: 0.5
+    car: 0.4
+    bus: 0.4
+    truck: 0.4
+    motorcycle: 0.4
+    bicycle: 0.4
+    traffic light: 0.5
+  iou: 0.7
+  imgsz: 640
+  segment: true
+  minimize_points: true
+
+minimize_points: true
